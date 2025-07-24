@@ -2,6 +2,7 @@ import { useState } from "react";
 import Dashboard from "@/components/Dashboard";
 import Sidebar from "@/components/Sidebar";
 import CameraGrid from "@/components/CameraGrid";
+import IncidentManagement from "@/components/IncidentManagement";
 import heroImage from "@/assets/hero-security.jpg";
 
 const Index = () => {
@@ -14,12 +15,7 @@ const Index = () => {
       case "cameras":
         return <CameraGrid />;
       case "incidents":
-        return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-foreground mb-4">Incident Management</h2>
-            <p className="text-muted-foreground">Incident tracking and investigation tools</p>
-          </div>
-        );
+        return <IncidentManagement />;
       case "analytics":
         return (
           <div className="p-6">
