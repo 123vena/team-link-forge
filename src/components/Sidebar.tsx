@@ -105,7 +105,7 @@ const Sidebar = ({ activeView, onViewChange }: SidebarProps) => {
                 <Shield className="w-5 h-5 text-primary-foreground" />
               </div>
               <div>
-                <h2 className="font-bold text-sidebar-foreground">SecureLink</h2>
+                <h2 className="font-bold text-sidebar-foreground">Orasicore</h2>
                 <p className="text-xs text-sidebar-foreground/60">Security Platform</p>
               </div>
             </div>
