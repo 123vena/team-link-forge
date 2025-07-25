@@ -3,7 +3,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
 import { TrendingUp, Users, Shield, AlertTriangle, Calendar, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -126,15 +125,22 @@ const Analytics = () => {
               <CardDescription>Security alerts over the past week</CardDescription>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={alertData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="alerts" fill="hsl(var(--primary))" />
-                </BarChart>
-              </ResponsiveContainer>
+              <div className="space-y-4">
+                {alertData.map((day, index) => (
+                  <div key={day.name} className="flex items-center justify-between">
+                    <span className="text-sm font-medium">{day.name}</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-24 bg-muted rounded-full h-2">
+                        <div 
+                          className="bg-primary h-2 rounded-full" 
+                          style={{ width: `${(day.alerts / 35) * 100}%` }}
+                        />
+                      </div>
+                      <span className="text-sm w-8">{day.alerts}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
@@ -147,34 +153,28 @@ const Analytics = () => {
                 <CardDescription>Types of security incidents this month</CardDescription>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
-                  <PieChart>
-                    <Pie
-                      data={incidentTypes}
-                      cx="50%"
-                      cy="50%"
-                      outerRadius={80}
-                      fill="#8884d8"
-                      dataKey="value"
-                    >
-                      {incidentTypes.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                  </PieChart>
-                </ResponsiveContainer>
-                <div className="mt-4 space-y-2">
-                  {incidentTypes.map((item) => (
+                <div className="space-y-4">
+                  {incidentTypes.map((item, index) => (
                     <div key={item.name} className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div 
-                          className="w-3 h-3 rounded-full" 
+                          className="w-4 h-4 rounded-full" 
                           style={{ backgroundColor: item.color }}
                         />
                         <span className="text-sm">{item.name}</span>
                       </div>
-                      <Badge variant="secondary">{item.value}%</Badge>
+                      <div className="flex items-center gap-2">
+                        <div className="w-20 bg-muted rounded-full h-2">
+                          <div 
+                            className="h-2 rounded-full" 
+                            style={{ 
+                              width: `${item.value}%`,
+                              backgroundColor: item.color 
+                            }}
+                          />
+                        </div>
+                        <Badge variant="secondary">{item.value}%</Badge>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -217,15 +217,22 @@ const Analytics = () => {
               <CardDescription>People count throughout the day</CardDescription>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={400}>
-                <LineChart data={trafficData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="hour" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="count" stroke="hsl(var(--primary))" strokeWidth={2} />
-                </LineChart>
-              </ResponsiveContainer>
+              <div className="space-y-4">
+                {trafficData.map((time, index) => (
+                  <div key={time.hour} className="flex items-center justify-between">
+                    <span className="text-sm font-medium">{time.hour}</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-32 bg-muted rounded-full h-3">
+                        <div 
+                          className="bg-primary h-3 rounded-full" 
+                          style={{ width: `${(time.count / 80) * 100}%` }}
+                        />
+                      </div>
+                      <span className="text-sm w-8">{time.count}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
