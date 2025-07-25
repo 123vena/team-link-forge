@@ -3,6 +3,8 @@ import Dashboard from "@/components/Dashboard";
 import Sidebar from "@/components/Sidebar";
 import CameraGrid from "@/components/CameraGrid";
 import IncidentManagement from "@/components/IncidentManagement";
+import Analytics from "@/components/Analytics";
+import LocationManagement from "@/components/LocationManagement";
 import heroImage from "@/assets/hero-security.jpg";
 
 const Index = () => {
@@ -17,12 +19,7 @@ const Index = () => {
       case "incidents":
         return <IncidentManagement />;
       case "analytics":
-        return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-foreground mb-4">Security Analytics</h2>
-            <p className="text-muted-foreground">Advanced analytics and reporting dashboard</p>
-          </div>
-        );
+        return <Analytics />;
       case "investigations":
         return (
           <div className="p-6">
@@ -31,12 +28,7 @@ const Index = () => {
           </div>
         );
       case "locations":
-        return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-foreground mb-4">Location Management</h2>
-            <p className="text-muted-foreground">Manage store locations and cameras</p>
-          </div>
-        );
+        return <LocationManagement />;
       case "ai-insights":
         return (
           <div className="p-6">
